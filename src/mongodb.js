@@ -16,12 +16,41 @@ mongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
 
      const db = client.db(databaseName);
 
-     db.collection('users').insertOne({
+    //  db.collection('users').insertOne({
         
-         name:'TIJANI',
-         age:33
+    //      name:'TIJANI',
+    //      age:33
 
-     });
+    //  },(error,result) => {
+
+    //       if (error){
+
+    //         return console.log('Unable to insert user');
+    //       }
+
+
+    //        console.log(result);
+    //  });
      
+
+        // db.collection('users').insertMany([
+
+        //     {
+        //         name:'karim',
+        //         age:14,
+        //     },
+        //     {
+        //         name:"amine",
+        //         age:19
+        //     }
+        // ],(error,result) => {
+
+        //     if(error){
+
+        //         return console.log('unable to insert those');
+        //     }
+
+        //     console.log(result);
+        // })
 
 });
