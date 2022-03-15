@@ -12,7 +12,16 @@ mongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
         return console.log('Unable to connect to database');
      }
 
-    console.log("connected correctly");
+   
+
+     const db = client.db(databaseName);
+
+     db.collection('users').insertOne({
+        
+         name:'TIJANI',
+         age:33
+
+     });
      
 
 });
