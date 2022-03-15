@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tijaniabdellatif/Task-app-node/issues"
   },
-  "homepage": "https://github.com/tijaniabdellatif/Task-app-node#readme"
+  "homepage": "https://github.com/tijaniabdellatif/Task-app-node#readme",
+  "dependencies": {
+    "mongodb": "^4.4.1"
+  }
 }
