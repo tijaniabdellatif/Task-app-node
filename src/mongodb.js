@@ -1,10 +1,15 @@
 //CRUD operations
-const mongodb = require('mongodb');
-const mongoClient = mongodb.MongoClient;
+const {MongoClient,ObjectId} = require('mongodb');
+
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
-mongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => {
+const id = new ObjectId();
+console.log(id.id.length)
+console.log(id.toHexString().length);
+console.log(id.getTimestamp());
+
+MongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => {
 
 
      if(error){
@@ -17,8 +22,9 @@ mongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
      const db = client.db(databaseName);
 
     //  db.collection('users').insertOne({
-        
-    //      name:'TIJANI',
+
+    //      _id:id,
+    //      name:'abdellatif tijani',
     //      age:33
 
     //  },(error,result) => {
@@ -53,4 +59,34 @@ mongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
         //     console.log(result);
         // })
 
+        // db.collection('tasks').insertMany([
+
+        //      {
+        //          title: "task #1",
+        //          description:"Making a camp",
+        //          date:new Date("2021-03-15"),
+        //          completed:true
+        //      },
+
+        //      {
+        //         title: "task #2",
+        //         description:"Eating a breafast",
+        //         date:new Date("2021-03-16"),
+        //         completed:false
+        //     }
+
+        // ],(error,result) => {
+
+        //     if(result.insertedCount === 2){
+
+        //         return console.log('inserted successfully');
+        //     }
+
+        //     else {
+
+        //         return console.log(error);
+        //     }
+        // });
+
+        
 });
