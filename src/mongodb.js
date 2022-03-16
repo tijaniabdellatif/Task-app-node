@@ -5,9 +5,6 @@ const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
 MongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => {
-
-    
-
      if(error){
 
         return console.log('Unable to connect to database');
@@ -15,52 +12,26 @@ MongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
 
      const db = client.db(databaseName);
 
-     db.collection("users").count({
+ 
+     const stringID = '62310f9b5aec19edfcc97365';
 
-          name:"TIJANI"
-     },(error,num) => {
+     db.collection('users').updateOne({
 
-        console.log("the count is : " + typeof(num));
-     });
+        _id:new ObjectId(stringID)
+     },{
 
-     db.collection('users').countDocuments({
+      $inc:{
+          
+         age: 1
+      }
 
-          name:'amine'
-     },(error,result) => {
+     }).then((resutl) => {
+        console.log(resutl);
+     }).catch((error) => {
 
-         console.log("the result is : "+ result + " the type is : " +typeof(result));
-     })
-
-    /* Findone always return one record  */
-     db.collection('users').findOne({ _id: new ObjectId("62310e2ba376b89d5ca00351") },(error,user) => {
-
-        
-        if(error){
-            return console.log('unable to fetch');   
-        }
-
-        console.log(user);
+      console.log(error);
 
      })
-
-     /* Return a cursor a pointer to the data */
-     db.collection('users').find({ name:"TIJANI" }).toArray((error,users)=>{
-
-        console.log(users);
-     });
-
-
-    //  db.collection('tasks').findOne({_id:new ObjectId("string id")},(error,task) => {
-
-
-    //       console.log(task);
-    //  })
-    
-
-    db.collection('tasks').find({completed:false}).toArray((error,tasks) => {
-
-          console.log(tasks);
-    })
     
     
 });
