@@ -5,29 +5,37 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{
       
 })
 
-const User = mongoose.model('User',{
+const Tasks = mongoose.model('Tasks',{
+    
+    title:{
+        type:String,
+    },
 
-    name:{
+    description:{
+
         type:String
     },
 
-    age:{
+    completed:{
 
-        type:Number
-
+        type:Boolean
     }
+
+});
+
+const task1 = new Tasks({
+
+    title:'Task 1',
+    description:'cleaning a house',
+    completed:false
 })
 
-const user1 = new User({
-    name:'Tijani',
-    age:'miky'
-});
+task1.save().then((res) => {
 
-user1.save().then((res) => {
+    console.log(res);
+}).catch(error => {
 
-      console.log(res)
-}).catch((error) => {
+    console.log(error);
 
-    console.log(error)
+})
 
-});
