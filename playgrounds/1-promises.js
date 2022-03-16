@@ -5,6 +5,7 @@ const doWorkPromise = new Promise((resolve,reject) => {
             // resolve([1,2,5]);
 
             reject('this is my error');
+            // resolve([1,2,3]);
      },2000)
 
 });
@@ -18,3 +19,12 @@ doWorkPromise.then((result) => {
      console.log(error);
 
 });
+
+
+/* 
+
+ Promise : pending --->
+ 2 state : 
+ fullfiled or rejected
+
+*/
