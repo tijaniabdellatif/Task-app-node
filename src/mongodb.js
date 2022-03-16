@@ -43,15 +43,24 @@ MongoClient.connect(connectionURL,{ useNewUrlParser : true },(error,client)  => 
 
      })
 
-     
-    
-   
      /* Return a cursor a pointer to the data */
      db.collection('users').find({ name:"TIJANI" }).toArray((error,users)=>{
 
         console.log(users);
      });
+
+
+    //  db.collection('tasks').findOne({_id:new ObjectId("string id")},(error,task) => {
+
+
+    //       console.log(task);
+    //  })
     
+
+    db.collection('tasks').find({completed:false}).toArray((error,tasks) => {
+
+          console.log(tasks);
+    })
     
     
 });
