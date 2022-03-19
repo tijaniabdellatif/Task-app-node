@@ -12,6 +12,19 @@ const User = mongoose.model('User',{
         required:true,
         trim:true
     },
+
+    password:{
+
+        type:String,
+        required:true,
+        trim:true,
+        minlength:7,
+        validate(value){
+            if(value.toLowerCase().includes('password')){
+               throw new Error('The password must be greater than 6 character');
+            }
+        }
+    },
     age:{
         type:Number,
         default:0,
@@ -35,20 +48,30 @@ const User = mongoose.model('User',{
 
 });
 
+var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
 const Tasks = mongoose.model('Tasks',{
     
     title:{
         type:String,
-        required:true
+        required:true,
+        trim:true,
+        validate(value){
+
+              if(format.test(value)){
+
+                  throw new Error('The title can not contain special characters');
+              }
+        }
     },
 
     description:{
 
         type:String,
+        required:true,
+        trim:true,
         validate(value){
-
             if(value === ''){
-
                 throw new Error('must not be empty')
             }
 
@@ -57,7 +80,8 @@ const Tasks = mongoose.model('Tasks',{
 
     completed:{
 
-        type:Boolean
+        type:Boolean,
+        default:false
     }
 
 });
@@ -65,8 +89,9 @@ const Tasks = mongoose.model('Tasks',{
 
 // const myuser = new User({
 
-//     name:' abdellatif Tijani ',
-//     email:'TIJANI@gmail.com  '
+//     name:'amine khalil',
+//     email:'amine@amine.ma',
+//     password:'re3356TGT'
 // })
 
 // myuser.save().then((res) => {
@@ -79,19 +104,18 @@ const Tasks = mongoose.model('Tasks',{
 // })
 
 
-// // const task1 = new Tasks({
+ const task1 = new Tasks({
 
-// //     title:'Task 2',
-// //     description:'',
-// //     completed:false
-// // })
+    title:'Task',
+    description:'hello world'
+ })
 
-// // task1.save().then((res) => {
+ task1.save().then((res) => {
 
-// //     console.log(res);
-// // }).catch(error => {
+     console.log(res);
+ }).catch(error => {
 
-// //     console.log(error);
+     console.log(error);
 
-// // })
+});
 
