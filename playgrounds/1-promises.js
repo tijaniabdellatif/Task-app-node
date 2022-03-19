@@ -1,9 +1,7 @@
 const doWorkPromise = new Promise((resolve,reject) => {
 
      setTimeout(() => {
-
             // resolve([1,2,5]);
-
             reject('this is my error');
             // resolve([1,2,3]);
      },2000)
