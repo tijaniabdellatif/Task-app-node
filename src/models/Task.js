@@ -1,20 +1,10 @@
 const mongoose = require('mongoose');
-var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-
-
 const Tasks = mongoose.model('Tasks',{
     
     title:{
         type:String,
         required:true,
-        trim:true,
-        validate(value){
-
-              if(format.test(value)){
-
-                  throw new Error('The title can not contain special characters');
-              }
-        }
+        trim:true
     },
 
     description:{
@@ -37,3 +27,5 @@ const Tasks = mongoose.model('Tasks',{
     }
 
 });
+
+module.exports=Tasks;
