@@ -61,38 +61,65 @@ app.get('/users',async (req,res) => {
   }
 })
 
+
+
 app.post('/tasks',(req,res) => {
     const task = new Task(req.body);
-    task.save().then(() => {
-         res.status(201).send(task)
-    }).catch((error) => {
-     res.status(400).send(error);
-    })
+  try {
+
+    await task.save();
+    res.status(201).send(task)
+  
+      } catch (error) {
+          res.status(500).send({
+
+              status:req.statusCode,
+               error,
+          })
+       }
 })
 
 app.get('/tasks',(req,res) => {
 
-  Task.find({}).then((tasks) => {
-    res.status(200).send(tasks);      
-}).catch(error => {
- res.status(500).send(error);
-})
+  try {
+
+     const tasks = await Task.find({});
+     res.status(200).send(tasks);
+    
+  } catch (error) {
+    
+      res.status(500).send({
+           status:res.statusCode,
+           error
+      })
+  }
+ 
 })
 
 app.get('/tasks/:id',(req,res) => {
   const _id = req.params.id
-  Task.findById(_id).then((task) => {  
-         if(!task){
-              return res.status(404).send({
-                message:"No data provided",
-                status:res.statusCode,
-              });
-         }
-        res.status(200).send(task);
-  }).catch((error) => {
-       res.status(500).send(error);
-  })
+
+  try {
     
+      const task = await Task.findById(_id);
+      if(!task){
+         
+          return res.status(404).send({
+            status:res.statusCode,
+            message: res.statusMessage
+          })
+      }
+
+      res.status(200).send(task)
+  } catch (error) {
+    
+      res.status(500).send({
+
+        status:res.statusCode,
+        error
+      })
+  }
+
 })
 
 app.listen(port,() => {
