@@ -93,6 +93,27 @@ app.patch('/users/:id',async (req,res) => {
      }
 });
 
+app.delete('/users/:id', async (req,res) => {
+  const _id = req.params.id;
+  try {
+    const user = await User.findByIdAndDelete(_id);
+    if(!user){
+
+        res.status(404).send({
+
+            status:res.statusCode,
+            message:'Not Found'
+        })
+    }
+
+    res.status(200).send(user);
+    
+  } catch (error) {
+     
+      res.status(500).send(error);
+  }
+})
+
 app.post('/tasks',async (req,res) => {
     const task = new Task(req.body);
   try {
@@ -181,6 +202,30 @@ app.patch('/tasks/:id',async (req,res) => {
   }
 
 })
+
+app.patch('/tasks/:id',async (req,res) => {
+ 
+  const _id = req.params.id;
+  try {
+    const task = await Task.findByIdAndDelete(_id);
+    if(!task){
+
+        res.status(404).send({
+
+            status:res.statusCode,
+            message:'Not Found'
+        })
+    }
+
+    res.status(200).send(task);
+    
+  } catch (error) {
+     
+      res.status(500).send(error);
+  }
+
+})
+
 app.listen(port,() => {
     console.log('Server is up on port ' + port);
 });
